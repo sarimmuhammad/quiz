@@ -377,6 +377,7 @@ def submit_quiz():
 
         questions = data.get("questions")
         answers = data.get("answers")  # list of {"id": 1, "answer": "A"}
+        username = data.get("username")  # logged-in user from localStorage
 
         if not questions or not answers:
             return jsonify({"error": "Missing 'questions' or 'answers'"}), 400
@@ -418,6 +419,7 @@ def submit_quiz():
         percentage = round((correct_count / total) * 100, 1)
 
         results_col.insert_one({
+            "username":    username,
             "quiz_id":    data.get("quiz_id"),
             "subject":    data.get("subject"),
             "topic":      data.get("topic"),

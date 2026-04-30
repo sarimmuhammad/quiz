@@ -128,10 +128,14 @@ function App() {
         answer,
       }));
 
+      // Get logged-in username from localStorage (set during login)
+      const username = localStorage.getItem('username');
+
       const response = await fetch(`${API_BASE_URL}/submit-quiz`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          username:   username,
           quiz_id:    quiz.quiz_id,
           subject:    quiz.subject,
           topic:      quiz.topic,
